@@ -1206,11 +1206,10 @@
   window.login = login;
   window.togglePassword = togglePassword;
   document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.querySelector("form");
-    if (document.getElementById("email") && loginForm) {
-      if (window.location.pathname === "/LogIn.html") {
-        loginForm.addEventListener("submit", login);
-      }
+     const loginForm = document.querySelector("form");
+    if (document.getElementById("email") && document.getElementById("password") && loginForm) {
+      loginForm.addEventListener("submit", login);
+    }
     }
     if (window.location.pathname === "/EmailVerification.html") {
       const emailField = document.getElementById("email");
