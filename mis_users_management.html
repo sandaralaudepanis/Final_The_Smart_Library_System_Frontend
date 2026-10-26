@@ -3,16 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Time-in / Time-out</title>
+  <title>Users Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="time_in_out.css">
+  <link rel="stylesheet" href="mis_users_management.css">
 </head>
 <body>
 <div class="app">
-
-  <!-- ============ SIDEBAR ============ -->
   <aside class="sidebar">
     <div class="brand">
       <img class="seal" src="../img/ptc_logo.png" alt="Pateros Technological College seal">
@@ -22,13 +20,12 @@
       </div>
     </div>
 
-    <!-- MIS Admin account navigation -->
-    <nav class="nav" id="nav" aria-label="Main">
+    <nav class="nav" aria-label="Main Navigation">
       <a href="dashboard.html">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
         Dashboard
       </a>
-      <a href="time_in_out.html" class="active">
+      <a href="time_in_out.html">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.9"/></svg>
         Time-in/Time-out
       </a>
@@ -40,8 +37,8 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 17v-3M12.5 17v-5M16 17v-2"/></svg>
         Reports
       </a>
-      <a href="users_management.html">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 2.7-6 6-6s6 2 6 6"/><path d="M16 5a3 3 0 010 6M19 20c0-3-1.5-5-4-6"/></svg>
+      <a href="users_management.html" class="active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0111 0"/><path d="M16 5.6a3.2 3.2 0 010 4.8M18 19a5.6 5.6 0 00-2.2-4.4"/></svg>
         Users Management
       </a>
     </nav>
@@ -62,37 +59,52 @@
     </div>
   </aside>
 
-  <!-- ============ MAIN CONTENT ============ -->
   <main class="main">
     <div class="head">
       <div>
-        <h1>Time-in / Time-out Master Logs</h1>
-        <p class="sub">Real-time attendance history records</p>
+        <h1>Users Management</h1>
+        <p class="sub">Manage system accounts separately from library people information</p>
       </div>
-
       <div class="search-box">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="searchInput" placeholder="Search Name or ID...">
       </div>
     </div>
 
-    <!-- Green container panel -->
+    <div class="top-action-bar">
+      <div class="user-view-tabs" role="tablist" aria-label="User management category">
+        <button type="button" id="viewSystemUsers" class="view-toggle active" role="tab" aria-selected="true">System Users</button>
+        <button type="button" id="viewPeopleInformation" class="view-toggle" role="tab" aria-selected="false">People Information</button>
+      </div>
+      <select id="systemRoleFilter" class="system-role-filter" aria-label="Filter system users by role">
+        <option value="">All system users</option>
+        <option value="MIS Admin">MIS Admin Accounts</option>
+        <option value="Librarian">Librarian Accounts</option>
+      </select>
+      <button class="btn-add-user" type="button">
+        ADD SYSTEM USER
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+
     <section class="stage">
-      <div class="logs-card">
-        <div class="scroll" tabindex="0">
-          <table>
-            <thead>
-              <tr>
-                <th>USER ID</th>
-                <th>NAME</th>
-                <th>ROLE / DEPARTMENT</th>
-                <th>ACTION</th>
-                <th>TIMESTAMP</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
+      <div class="scroll" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>ROLE</th>
+              <th>ACCOUNT STATUS</th>
+              <th>CREATED</th>
+              <th>LAST LOGIN</th>
+              <th class="center">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7">Loading system accounts...</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
